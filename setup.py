@@ -28,7 +28,7 @@ def main():
 	os.rename(CURRENT_DIR + '/project_name/project_name', CURRENT_DIR + '/project_name/%s' % project_name)
 	os.rename(CURRENT_DIR + '/project_name', CURRENT_DIR + '/%s' % project_name)
 
-	database_name = raw_input('What should your database name be? (For Local Testing - press enter to skip) ')
+	database_name = raw_input('What should your database name be for local testing? (Enter: to skip) ')
 	if len(database_name) > 0:
 		log('Creating postgres database %s using cmd "createdb"' % database_name)
 		subprocess.call('createdb ' + database_name, shell=True)
@@ -36,10 +36,25 @@ def main():
 		find_replace_all('POSTGRES_DATABASE_NAME', database_name, file_paths)
 		log('Settings postgres database name to %s in settings.py' % database_name)
 
-		user_name = raw_input('What is your current computer username (i.e. Mark)? (For Local Testing) ')
+		user_name = raw_input('What is your current computer username (i.e. Mark)? ')
 		log('Settings postgres username to ' + user_name)
 		find_replace_all('POSTGRES_USER_NAME', user_name, file_paths)
 	else:
 		log('Skipping local database creation')
+
+	continue_response = raw_input('Would you like to create your heroku app now? (y/n) ')
+	if continue_response == 'y':
+		#builds heroku cedar app - https://devcenter.heroku.com/articles/cedar
+		herokuapp_name = ''
+		while len(herokuapp_name) <= 0:
+			print '\nWhat would you like to name your heroku app? This will create a cedar stack (heroku\'s default and recommended stack) and make sure your app name is unique!'
+			herokuapp_name = raw_input('==> ')
+			if len(herokuapp_name) == 0:
+				print '\nNot a valid name!'
+
+		log('Creating heroku app')
+		subprocess.call('heroku create --stack cedar ' + herokuapp_name, shell=True)
+	else:
+		log('Skipping heroku app creation')
 
 main()

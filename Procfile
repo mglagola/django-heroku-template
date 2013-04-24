@@ -1,0 +1,1 @@
+web: python project_name/manage.py run_gunicorn

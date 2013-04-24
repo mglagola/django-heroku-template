@@ -70,6 +70,21 @@ STATIC_ROOT = ''
 # Example: "http://example.com/static/", "http://static.example.com/"
 STATIC_URL = '/static/'
 
+# Easy AWS setup integration
+# If you followed the setup.py - these settings should be set already
+USING_S3 = False # will be = True if followed s3 instructions in setup.py
+if not DEBUG and USING_S3:
+    AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID');
+    AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY');
+    AWS_STORAGE_BUCKET_NAME = os.getenv('S3_BUCKET_NAME');
+
+    DEFAULT_FILE_STORAGE = 'project_name.s3utils.MediaRootS3BotoStorage'
+    STATICFILES_STORAGE = 'project_name.s3utils.StaticRootS3BotoStorage'
+
+    BASE_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
+    STATIC_URL = '%sstatic/' % BASE_URL
+    MEDIA_URL = '%suploads/' % BASE_URL
+
 # Additional locations of static files
 STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".

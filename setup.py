@@ -5,11 +5,22 @@ CURRENT_DIR = os.getcwd()
 def log(message):
 	print '===> ' + message + '...'
 
+def ask(message):
+	response = raw_input(message + ' (y/n) ')
+	if response == 'y':
+		return True
+	return False
+
 def find_replace_all(find, replace, file_paths):
 	# with fileinput.FileInput(file_paths) as f: <--Python 3.x
 	for line in fileinput.FileInput(file_paths, inplace=1):
 		line = line.replace(find, replace)
 		print line,
+
+def append_file(file_path, lines):
+	with open(file_path, 'a') as f:
+		for line in lines:
+			f.write(line+'\n')
 
 def main():
 	print '\nMake sure you enter "appropriate" responses to each question, DO NOT enter shell commands. Anything that happens is not my fault.\n'
@@ -42,8 +53,7 @@ def main():
 	else:
 		log('Skipping local database creation')
 
-	continue_response = raw_input('Would you like to create your heroku app now? (y/n) ')
-	if continue_response == 'y':
+	if ask('Would you like to create your heroku app now?'):
 		#builds heroku cedar app - https://devcenter.heroku.com/articles/cedar
 		herokuapp_name = ''
 		while len(herokuapp_name) <= 0:
@@ -56,5 +66,21 @@ def main():
 		subprocess.call('heroku create --stack cedar ' + herokuapp_name, shell=True)
 	else:
 		log('Skipping heroku app creation')
+
+	if ask('Would you like to setup S3 for your heroku app?'):
+		AWS_ACCESS_KEY_ID = raw_input('AWS ACCESS KEY ID: ')
+		AWS_SECRET_ACCESS_KEY = raw_input('AWS SECRET ACCESS KEY: ')
+		S3_BUCKET_NAME = raw_input('S3 BUCKET NAME: ')
+		log('Setting Heroku Config')
+		subprocess.call('heroku config:set AWS_ACCESS_KEY_ID=%s AWS_SECRET_ACCESS_KEY=%s S3_BUCKET_NAME=%s' % (AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, S3_BUCKET_NAME), shell=True)
+		log('Updating virtualenv')
+		lines = [
+			'export AWS_ACCESS_KEY_ID=%s' % AWS_ACCESS_KEY_ID, 
+			'export AWS_SECRET_ACCESS_KEY=%s' % AWS_SECRET_ACCESS_KEY, 
+			'export S3_BUCKET_NAME=%s' % S3_BUCKET_NAME,
+		]
+		append_file(os.path.join(CURRENT_DIR, '.env', 'bin', 'activate'), lines)
+		log('Updating settings.py')
+		find_replace_all('USING_S3 = False', 'USING_S3 = True', [os.path.join(CURRENT_DIR, project_name, project_name, 'settings.py')])
 
 main()

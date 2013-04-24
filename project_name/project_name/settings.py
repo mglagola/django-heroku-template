@@ -15,7 +15,7 @@ ADMINS = (
 # EMAIL_HOST = 'smtp.gmail.com'
 # EMAIL_PORT = 587
 # EMAIL_HOST_USER = 'your.gmail@gmail.com'
-# EMAIL_HOST_PASSWORD = 'your.gmail.password'
+# EMAIL_HOST_PASSWORD = 'your.gmail.password' <-- should use os.getenv
 # EMAIL_USE_TLS = True
 
 MANAGERS = ADMINS

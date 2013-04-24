@@ -28,15 +28,18 @@ def main():
 	os.rename(CURRENT_DIR + '/project_name/project_name', CURRENT_DIR + '/project_name/%s' % project_name)
 	os.rename(CURRENT_DIR + '/project_name', CURRENT_DIR + '/%s' % project_name)
 
-	database_name = raw_input('What should your database name be? ')
-	log('Creating postgres database %s using cmd "createdb"' % database_name)
-	subprocess.call('createdb ' + database_name, shell=True)
-	file_paths = [os.path.join(CURRENT_DIR, project_name, project_name, 'settings.py')]
-	find_replace_all('POSTGRES_DATABASE_NAME', database_name, file_paths)
-	log('Settings postgres database name to %s in settings.py' % database_name)
+	database_name = raw_input('What should your database name be? (For Local Testing - press enter to skip) ')
+	if len(database_name) > 0:
+		log('Creating postgres database %s using cmd "createdb"' % database_name)
+		subprocess.call('createdb ' + database_name, shell=True)
+		file_paths = [os.path.join(CURRENT_DIR, project_name, project_name, 'settings.py')]
+		find_replace_all('POSTGRES_DATABASE_NAME', database_name, file_paths)
+		log('Settings postgres database name to %s in settings.py' % database_name)
 
-	user_name = raw_input('What is your current computer username (i.e. Mark)? ')
-	log('Settings postgres username to ' + user_name)
-	find_replace_all('POSTGRES_USER_NAME', user_name, file_paths)
+		user_name = raw_input('What is your current computer username (i.e. Mark)? (For Local Testing) ')
+		log('Settings postgres username to ' + user_name)
+		find_replace_all('POSTGRES_USER_NAME', user_name, file_paths)
+	else:
+		log('Skipping local database creation')
 
 main()

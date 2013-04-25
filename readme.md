@@ -22,7 +22,7 @@ These must be installed on your Mac:
 4. run `virtualenv .env` in terminal. You don't have to name it `.env`, but this is **required** if you want to use the setup.py script (specifically the amazon S3 setup section).
 5. run `source .env/bin/activate` in terminal.  This activates your virtual environment.
 6. run `pip install -r requirements.txt` in terminal.  This installs all the requirements needed for django, amazon S3, and heroku.
-7. run `python setup.py` in terminal. This is a handy script that will setup your project to be heroku and S3 ready.  It will even change your project name from "*project_name*" to whatever you like.  **DO NOTE:** the script is not perfect.  It was created quickly and **does not** handle errors!
+7. run `python setup.py` in terminal. This is a handy script that will setup your project to be heroku and S3 ready.  It will even change your project name from "project_name" to whatever you like.  **DO NOTE:** the script is not perfect.  It was created quickly and **does not** handle errors!
 
 - Your project is now setup.  You can test locally by running `python manage.py syncdb` and then `python manage.py runserver` in terminal.
 - You could also test it on the herokuapp site.  Just make sure you run `syncdb` on your heroku app.

@@ -18,7 +18,7 @@ These must be installed on your Mac:
 1. Either download the .zip or clone this template to your desired directory.  If you download the .zip, extract it…
 2. `cd` into the template directory you just cloned or extracted.  Change the top folder name if you like, but don't change the project name.  That will be handled in the `setup.py` script.
 3. Either run `git init` in terminal or drag the folder into your github app (my preferred way, whats wrong with some GUI? :) ).  
-4. run `virtualenv .env` in terminal. **Yes, IT MUST BE ".env"**.  I'll get to why later.
+4. run `virtualenv .env` in terminal. You don't have to name it `.env`, but this is **required** if you want to use the setup.py script (specifically the amazon S3 setup section).
 5. run `source .env/bin/activate` in terminal.  This activates your virtual environment.
 6. run `pip install -r requirements.txt` in terminal.  This installs all the requirements needed for django, amazon S3, and heroku.
 7. run `python setup.py` in terminal. This is a handy script that will setup your project to be heroku and S3 ready.  It will even change your project name from "*project_name*" to whatever you like.  **DO NOTE:** the script is not perfect.  It was created quickly and **does not** handle errors!

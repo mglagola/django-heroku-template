@@ -141,6 +141,10 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
+    #heroku template:
+    'gunicorn',
+    'south',
+    'storages',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )

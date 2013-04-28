@@ -77,6 +77,7 @@ if not DEBUG and USING_S3:
     AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID');
     AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY');
     AWS_STORAGE_BUCKET_NAME = os.getenv('S3_BUCKET_NAME');
+    AWS_QUERYSTRING_AUTH = False
 
     DEFAULT_FILE_STORAGE = 'project_name.s3utils.MediaRootS3BotoStorage'
     STATICFILES_STORAGE = 'project_name.s3utils.StaticRootS3BotoStorage'

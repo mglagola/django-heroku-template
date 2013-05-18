@@ -50,15 +50,9 @@ def create_local_database(project_name):
 
 def create_herokuapp():
 	#builds heroku cedar app - https://devcenter.heroku.com/articles/cedar
-	herokuapp_name = ''
-	while len(herokuapp_name) <= 0:
-		print '\nWhat would you like to name your heroku app? This will create a cedar stack (heroku\'s default and recommended stack) and make sure your app name is unique!'
-		herokuapp_name = raw_input('==> ')
-		if len(herokuapp_name) == 0:
-			print '\nNot a valid name!'
-
 	log('Creating heroku app')
-	subprocess.call('heroku create --stack cedar ' + herokuapp_name, shell=True)
+	subprocess.call('heroku create --stack cedar', shell=True)
+	log('Heroku app created, you can always rename the heroku app later using heroku apps:rename YOUR_NEW_NAME')
 
 def s3_setup(project_name):
 	AWS_ACCESS_KEY_ID = raw_input('AWS ACCESS KEY ID: ')

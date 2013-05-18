@@ -50,7 +50,7 @@ def create_local_database(project_name):
 	find_replace_all('POSTGRES_DATABASE_NAME', database_name, file_paths)
 	log('Settings postgres database name to %s in settings.py' % database_name)
 
-	user_name = get_input('What is your home folder name (i.e. Mark)? ')
+	user_name = get_input('What is your postgres username (i.e. Mark)? ')
 	log('Settings postgres username to ' + user_name)
 	find_replace_all('POSTGRES_USER_NAME', user_name, file_paths)
 

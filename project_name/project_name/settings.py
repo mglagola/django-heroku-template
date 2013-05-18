@@ -4,7 +4,7 @@ import os, dj_database_url
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-CURRENT_DIR = os.getcwd()
+CURRENT_DIR = os.path.dirname(__file__)
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),

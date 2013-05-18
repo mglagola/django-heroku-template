@@ -44,7 +44,7 @@ def create_local_database(project_name):
 	find_replace_all('POSTGRES_DATABASE_NAME', database_name, file_paths)
 	log('Settings postgres database name to %s in settings.py' % database_name)
 
-	user_name = raw_input('What is your current computer username (i.e. Mark)? ')
+	user_name = raw_input('What is your home folder name (i.e. Mark)? ')
 	log('Settings postgres username to ' + user_name)
 	find_replace_all('POSTGRES_USER_NAME', user_name, file_paths)
 
@@ -64,6 +64,7 @@ def s3_setup(project_name):
 	AWS_ACCESS_KEY_ID = raw_input('AWS ACCESS KEY ID: ')
 	AWS_SECRET_ACCESS_KEY = raw_input('AWS SECRET ACCESS KEY: ')
 	S3_BUCKET_NAME = raw_input('S3 BUCKET NAME: ')
+	venv_name = raw_input('What is the name of your virtualenv dir? (i.e. ".env"): ')
 	log('Setting Heroku Config')
 	subprocess.call(
 		'heroku config:set AWS_ACCESS_KEY_ID=%s AWS_SECRET_ACCESS_KEY=%s S3_BUCKET_NAME=%s' 
@@ -75,7 +76,7 @@ def s3_setup(project_name):
 		'export AWS_SECRET_ACCESS_KEY=%s' % AWS_SECRET_ACCESS_KEY, 
 		'export S3_BUCKET_NAME=%s' % S3_BUCKET_NAME,
 	]
-	append_file(os.path.join(CURRENT_DIR, '.env', 'bin', 'activate'), lines)
+	append_file(os.path.join(CURRENT_DIR, venv_name, 'bin', 'activate'), lines)
 	log('Updating settings.py')
 	find_replace_all('USING_S3 = False', 'USING_S3 = True', [os.path.join(CURRENT_DIR, project_name, project_name, 'settings.py')])
 

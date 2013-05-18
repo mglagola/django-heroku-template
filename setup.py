@@ -86,12 +86,15 @@ def main():
 	rename_project(project_name)
 
 	create_static_folder(project_name)
+	print '\n'
 
 	# if ask('Would you like to create a local postgres database?'):
 	create_local_database(project_name)
+	print '\n'
 
 	# if ask('Would you like to create your heroku app now?'):
 	create_herokuapp()
+	print '\n'
 
 		# if ask('Would you like to setup S3 for your heroku app?'):
 	s3_setup(project_name)

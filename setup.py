@@ -96,6 +96,7 @@ def main():
 		# if ask('Would you like to setup S3 for your heroku app?'):
 	s3_setup(project_name)
 
+	print '\nDone!\n'
 	# else:
 		# log('Skipping heroku app creation')
 

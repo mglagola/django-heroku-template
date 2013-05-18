@@ -58,6 +58,8 @@ def create_herokuapp():
 	log('Heroku app created, you can always rename the heroku app later using heroku apps:rename YOUR_NEW_NAME')
 
 def s3_setup(project_name):
+	log ('Initializing Amazon S3 Setup')
+	log ('Enter your Amazon S3 Keys and bucket name')
 	AWS_ACCESS_KEY_ID = raw_input('AWS ACCESS KEY ID: ')
 	AWS_SECRET_ACCESS_KEY = raw_input('AWS SECRET ACCESS KEY: ')
 	S3_BUCKET_NAME = raw_input('S3 BUCKET NAME: ')
@@ -85,16 +87,16 @@ def main():
 
 	create_static_folder(project_name)
 
-	if ask('Would you like to create a local postgres database?'):
-		create_local_database(project_name)
+	# if ask('Would you like to create a local postgres database?'):
+	create_local_database(project_name)
 
-	if ask('Would you like to create your heroku app now?'):
-		create_herokuapp()
+	# if ask('Would you like to create your heroku app now?'):
+	create_herokuapp()
 
-		if ask('Would you like to setup S3 for your heroku app?'):
-			s3_setup(project_name)
+		# if ask('Would you like to setup S3 for your heroku app?'):
+	s3_setup(project_name)
 
-	else:
-		log('Skipping heroku app creation')
+	# else:
+		# log('Skipping heroku app creation')
 
 main()

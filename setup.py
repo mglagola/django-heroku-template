@@ -36,6 +36,9 @@ def rename_project(project_name):
 	os.rename(CURRENT_DIR + '/project_name/project_name', CURRENT_DIR + '/project_name/%s' % project_name)
 	os.rename(CURRENT_DIR + '/project_name', CURRENT_DIR + '/%s' % project_name)
 
+def create_static_folder(project_name):
+	subprocess.call('mkdir %s/%s/static' % (project_name, project_name), shell=True)
+
 def create_local_database(project_name):
 	database_name = raw_input('What should your database name be for local testing? ')
 	log('Creating postgres database %s using cmd "createdb"' % database_name)
@@ -79,6 +82,8 @@ def main():
 
 	project_name = raw_input('What would you like to name your project? ')
 	rename_project(project_name)
+
+	create_static_folder(project_name)
 
 	if ask('Would you like to create a local postgres database?'):
 		create_local_database(project_name)

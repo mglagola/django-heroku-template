@@ -8,7 +8,7 @@ This template simplifies the setup process of creating a Django project that's r
 
 - It takes **about 3 minutes** to setup and run a **local** django project using this template.
 
-- It takes **under 10 minutes** to setup and run a django project using this template **on Heroku** (Following this [Tutorial](http://markglagola.com/post/django-heroku-template-depth-tutorial/)).
+- It takes **under 10 minutes** to setup and run a django project using this template **on Heroku** (Following this [Tutorial](http://markglagola.com/post/django-heroku-template-depth-tutorial/)).  Setting up and install requirements on Heroku for the first time is what takes the most time!
 
 
 ## Requirements
